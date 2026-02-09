@@ -7,12 +7,12 @@ let private printNoExecutable () =
     eprintf "No executable was specified as argument.\n"
 
 let private printHelp () =
-    printf "Usage: spin [options] <executable> [<arguments to executable>]
-\tOptions:
-\t\t-r
-\t\t--reverse\t\tReverse the direction of the spinner graphic.
-\t\t-h
-\t\t--help\t\t\tPrint this message and exit.\n"
+    printf "Usage: spin [options] <executable> [<arguments to executable>]\n
+    Options:
+        -r
+        --reverse        Reverse the direction of the spinner graphic.
+        -h
+        --help           Print this message and exit.\n"
 
 type FlagParseResults(args : string array, setFlags: Set<char>, errorHappened: bool) =
     struct
@@ -25,18 +25,16 @@ type FlagParseResults(args : string array, setFlags: Set<char>, errorHappened: b
     end
 
 let private printWrongArgument (flags : FlagParseResults) =
-    if not flags.hasError then
-        ()
-    eprintf $"Could not accept option '%s{flags.remainingArgs[0]}'.\n"
+    if flags.hasError then
+        eprintf $"Could not accept option '%s{flags.remainingArgs[0]}'.\n"
 
-
-(** Parse the flag arguments (i.e. arguments of the form -_ and --_).
+(* Parse the flag arguments (i.e. arguments of the form -_ and --_).
 Returns a triple with the remaining arguments, the flags parsed, and a
 boolean indicating whether an error was thrown.
 If a flag was encountered that was not among the acceptable options,
 then it will not be removed from the list of remaining arguments.
 Short-circuits, so that any error causes an immediate return. *)
-let rec _parseFlags (args : string array) (flags : Set<char>) =
+let rec private _parseFlags (args : string array) (flags : Set<char>) =
     if (args.Length = 0) then
         FlagParseResults(args, flags, false)
     else match args[0] with
@@ -49,10 +47,12 @@ let rec _parseFlags (args : string array) (flags : Set<char>) =
             | str when str[0] = '-' -> FlagParseResults(args, flags, true)
             | _ -> FlagParseResults(args, flags, false)
 
-let parseFlags (args : string array) =
+let private parseFlags (args : string array) =
     _parseFlags args (Set<char>([]))
 
-let exec (args : string array) =
+(* Execute a shell command.
+   Returns the process instance. *)
+let public exec (args : string array) =
     if (args.Length = 0) then
         ()
 
@@ -81,17 +81,16 @@ let main args =
         printHelp ()
         1
     else
-        let func =
-            match flags.hasFlag('r') with
-            | true -> spinBackwards
-            | false -> spin
+        let func = match flags.hasFlag('r') with
+                   | true -> spinBackwards
+                   | false -> spin
 
-        // Can start up manually or do either of following:
-        //let writer = StartSpinner func
-        let thread, writer = createSpinner func
-        thread.Start()
+        // Can also do:
+        //let thread, writer = createSpinner func
+        //thread.Start()
+        let writer = startSpinner func
         let execProcess = exec flags.remainingArgs
         while not execProcess.HasExited do
             ()
-        let _ = writer.WriteAsync(())
+        writer.WriteAsync(()) |> ignore
         0
