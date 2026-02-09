@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Spinner", "Spinner\Spinner.fsproj", "{A2FA6364-8B9B-4CDE-8A85-9089BA0DFA34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6690675E-E876-4480-AEA4-572C828F3586}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1D097C67-0EF3-4D7C-AA5E-A93AB5793898}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Spin", "Spin\Spin.fsproj", "{74BA529C-022D-42EC-912F-849337BB6C70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2FA6364-8B9B-4CDE-8A85-9089BA0DFA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FA6364-8B9B-4CDE-8A85-9089BA0DFA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FA6364-8B9B-4CDE-8A85-9089BA0DFA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FA6364-8B9B-4CDE-8A85-9089BA0DFA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74BA529C-022D-42EC-912F-849337BB6C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74BA529C-022D-42EC-912F-849337BB6C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74BA529C-022D-42EC-912F-849337BB6C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74BA529C-022D-42EC-912F-849337BB6C70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2FA6364-8B9B-4CDE-8A85-9089BA0DFA34} = {6690675E-E876-4480-AEA4-572C828F3586}
+		{74BA529C-022D-42EC-912F-849337BB6C70} = {6690675E-E876-4480-AEA4-572C828F3586}
+	EndGlobalSection
+EndGlobal
