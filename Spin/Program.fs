@@ -58,7 +58,7 @@ let public exec (args : string array) =
 
     let startInfo = ProcessStartInfo()
     startInfo.FileName <- args[0]
-    startInfo.UseShellExecute <- true
+    startInfo.UseShellExecute <- false
     for arg in args[1..] do
         startInfo.ArgumentList.Add(arg)
     let p = new Process()
